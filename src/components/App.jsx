@@ -1,5 +1,3 @@
-// import { propTypes } from 'prop-types';
-
 import { Component } from 'react';
 import { Notify } from 'notiflix';
 import { ContactForm } from './ContactForm/ContactForm';
