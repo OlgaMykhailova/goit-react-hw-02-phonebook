@@ -1,6 +1,7 @@
 // import { propTypes } from 'prop-types';
 // import * as yup from 'yup';
 import { Component } from 'react';
+import { Notify } from 'notiflix';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
@@ -17,7 +18,11 @@ export class App extends Component {
   };
 
   addContact = newContact => {
-    this.setState(({ contacts }) => ({ contacts: [newContact, ...contacts] }));
+    this.setState(({ contacts }) =>
+      contacts.find(contact => contact.name === newContact.name)
+        ? Notify.warning(`${newContact.name} is already in contacts`)
+        : { contacts: [newContact, ...contacts] }
+    );
   };
 
   changeFilter = e => {
