@@ -1,12 +1,13 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
 import { Component } from 'react';
+import { Form, Label, Text, Field, Button, ErrorMessage } from './ContactFormStyled';
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
-  number: yup.number().positive().integer().required(),
-});
+    name: yup.string().required(),
+    number: yup.number().positive().integer().required(),
+  });
 
 export class ContactForm extends Component {
   state = {
@@ -32,17 +33,17 @@ export class ContactForm extends Component {
         validationSchema={schema}
       >
         <Form>
-          <label>
-            <span>Name</span>
+          <Label>
+            <Text>Name</Text>
             <Field type="text" name="name"></Field>
             <ErrorMessage name="name" component="span"></ErrorMessage>
-          </label>
-          <label>
-            <span>Number</span>
+          </Label>
+          <Label>
+            <Text>Number</Text>
             <Field type="tel" name="number"></Field>
             <ErrorMessage name="number" component="span"></ErrorMessage>
-          </label>
-          <button type="submit">Add contact</button>
+          </Label>
+          <Button type="submit">Add contact</Button>
         </Form>
       </Formik>
     );
