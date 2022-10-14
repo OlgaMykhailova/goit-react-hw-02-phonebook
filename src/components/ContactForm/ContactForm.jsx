@@ -1,6 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 import { nanoid } from 'nanoid';
 import { Component } from 'react';
+
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  number: yup.number().positive().integer().required(),
+});
 
 export class ContactForm extends Component {
   state = {
@@ -8,19 +14,23 @@ export class ContactForm extends Component {
     number: '',
   };
 
-handleSubmit = (values, actions) => {
+  handleSubmit = (values, actions) => {
     const newContact = {
-        id: nanoid(6),
-        name: values.name,
-        number: values.number,
-      };
-      this.props.onSubmit(newContact);
-      actions.resetForm();
-}
+      id: nanoid(6),
+      name: values.name,
+      number: values.number,
+    };
+    this.props.onSubmit(newContact);
+    actions.resetForm();
+  };
 
   render() {
     return (
-      <Formik initialValues={this.state} onSubmit={this.handleSubmit}>
+      <Formik
+        initialValues={this.state}
+        onSubmit={this.handleSubmit}
+        validationSchema={schema}
+      >
         <Form>
           <label>
             <span>Name</span>

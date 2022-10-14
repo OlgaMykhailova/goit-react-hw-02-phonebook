@@ -1,5 +1,5 @@
 // import { propTypes } from 'prop-types';
-// import * as yup from 'yup';
+
 import { Component } from 'react';
 import { Notify } from 'notiflix';
 import { ContactForm } from './ContactForm/ContactForm';
