@@ -1,7 +1,8 @@
-export const ContactListItem = ({id, name, number}) => {
+export const ContactListItem = ({id, name, number, onDeleteContact}) => {
     return (
         <li key={id}>
-        {name}: {number}
+        <span>{name}: {number}</span>
+        <button type='button' onClick={() => onDeleteContact(id)}>Delete</button>
       </li>
     )
 }
