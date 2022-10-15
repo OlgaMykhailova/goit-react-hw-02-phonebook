@@ -16,11 +16,18 @@ export class App extends Component {
   };
 
   addContact = newContact => {
-    this.setState(({ contacts }) =>
-      contacts.find(contact => contact.name === newContact.name)
-        ? Notify.warning(`${newContact.name} is already in contacts`)
-        : { contacts: [newContact, ...contacts] }
+    const contactList = this.state.contacts;
+    const newContactNameNormalized = newContact.name.toLowerCase();
+
+    const findContact = contactList.find(
+      contact => contact.name.toLowerCase() === newContactNameNormalized
     );
+
+    findContact
+      ? Notify.warning(`${newContact.name} is already in contacts`)
+      : this.setState(({ contacts }) => ({
+          contacts: [newContact, ...contacts],
+        }));
   };
 
   deleteContact = contactId => {
